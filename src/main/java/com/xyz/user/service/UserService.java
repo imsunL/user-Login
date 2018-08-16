@@ -1,20 +1,20 @@
 package com.xyz.user.service;
 
-import com.xyz.user.Dao.UserDao;
-import com.xyz.user.User.User;
+import com.xyz.user.mapper.UserMapper;
+import com.xyz.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService {
+public class UserService implements UserMapper {
 
     @Autowired
-    private UserDao userDao;
+    private UserMapper userMapper;
 
     //注册
-    public String register(User user) {
-        if (userDao.getUser(user.getUserName()) == null) {
-            userDao.insert(user);
+    public String register(User user) throws Exception {
+        if (userMapper.selectUser(user.getUsername()) == null) {
+            userMapper.insertUser(user);
             return "注册成功";
 
         } else {
@@ -23,9 +23,9 @@ public class UserService {
     }
 
     //登录
-    public String login(User user) {
-        if (userDao.getUser(user.getUserName()) != null) {
-            if (userDao.getUser(user.getPassword()).equals(user.getPassword())) {
+    public String login(User user) throws Exception {
+        if (userMapper.selectUser(user.getUsername()) != null) {
+            if (userMapper.selectUser(user.getPassword()).equals(user.getPassword())) {
                 return "登录成功";
             }else {
                 return "密码不正确";
@@ -33,5 +33,15 @@ public class UserService {
         }else {
             return "用户名不正确";
         }
+    }
+
+    @Override
+    public int insertUser(User user) throws Exception {
+        return 0;
+    }
+
+    @Override
+    public User selectUser(String username) throws Exception {
+        return null;
     }
 }

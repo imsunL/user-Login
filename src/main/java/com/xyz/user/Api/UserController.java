@@ -1,7 +1,7 @@
 package com.xyz.user.Api;
 
 
-import com.xyz.user.User.User;
+import com.xyz.user.model.User;
 import com.xyz.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -29,14 +29,14 @@ public class UserController {
 
 
     @PostMapping("/register")
-    public String register(Model model, User user,HttpServletResponse response) {
+    public String register(Model model, User user,HttpServletResponse response) throws Exception {
         String result = userService.register(user);
         model.addAttribute("result",result);
         return  response.encodeRedirectURL("/index");
     }
 
     @PostMapping("/login")
-    public String login(Model model ,User user,HttpServletResponse response) {
+    public String login(Model model ,User user,HttpServletResponse response) throws Exception {
         String result = userService.login(user);
         model.addAttribute("result",result);
         return  response.encodeRedirectURL("/success");
