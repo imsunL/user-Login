@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService implements UserMapper {
+public class UserService {
 
     @Autowired
     private UserMapper userMapper;
@@ -35,13 +35,4 @@ public class UserService implements UserMapper {
         }
     }
 
-    @Override
-    public int insertUser(User user) throws Exception {
-        return 0;
-    }
-
-    @Override
-    public User selectUser(String username) throws Exception {
-        return null;
-    }
 }

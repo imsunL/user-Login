@@ -1,9 +1,10 @@
 package com.xyz.user.mapper;
 
 import com.xyz.user.model.User;
-import lombok.Data;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Repository;
 
+
+@Repository
 public interface UserMapper {
 
     int insertUser(User user) throws Exception;
